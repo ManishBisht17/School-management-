@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment App</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Assignment App</h1>
+        <nav>
+            <button id="viewAssignments">View Assignments</button>
+            <button id="createAssignment">Create Assignment</button>
+            <button id="submitAssignment">Submit Assignment</button>
+            <button id="gradeAssignment">Grade Assignment</button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="dashboard">
+            <h2>Dashboard</h2>
+            <div id="assignments-list">
+                <!-- Assignments will be dynamically loaded here -->
+            </div>
+        </section>
+
+        <section id="forms" class="hidden">
+            <h2>Forms</h2>
+            <!-- Create Assignment Form -->
+            <form id="create-assignment-form">
+                <h3>Create Assignment</h3>
+                <label for="content">Content:</label>
+                <textarea id="content" name="content" required></textarea>
+                <button type="submit">Create</button>
+            </form>
+
+            <!-- Submit Assignment Form -->
+            <form id="submit-assignment-form" class="hidden">
+                <h3>Submit Assignment</h3>
+                <label for="assignment-id">Assignment ID:</label>
+                <input type="number" id="assignment-id" name="assignment-id" required>
+                <label for="teacher-id">Teacher ID:</label>
+                <input type="number" id="teacher-id" name="teacher-id" required>
+                <button type="submit">Submit</button>
+            </form>
+
+            <!-- Grade Assignment Form -->
+            <form id="grade-assignment-form" class="hidden">
+                <h3>Grade Assignment</h3>
+                <label for="grade-assignment-id">Assignment ID:</label>
+                <input type="number" id="grade-assignment-id" name="grade-assignment-id" required>
+                <label for="grade">Grade:</label>
+                <input type="text" id="grade" name="grade" required>
+                <button type="submit">Grade</button>
+            </form>
+        </section>
+    </main>
+
+    <script src="/js/scripts.js"></script>
+</body>
+</html>
