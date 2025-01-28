@@ -1,0 +1,50 @@
+body {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+nav {
+    margin: 20px 0;
+    padding: 10px;
+    background: #f0f0f0;
+}
+
+form {
+    margin: 20px 0;
+    padding: 15px;
+    border: 1px solid #ddd;
+}
+
+input, textarea {
+    display: block;
+    margin: 10px 0;
+    padding: 8px;
+    width: 100%;
+}
+
+#teachers-section, #assignments-section {
+    margin: 20px 0;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.teacher-card, .assignment-card {
+    background: #f8f9fa;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 4px;
+}
+
+#regrade-form {
+    display: grid;
+    gap: 10px;
+    max-width: 400px;
+}
+
+#regrade-form input, #regrade-form select {
+    padding: 8px;
+    margin: 5px 0;
+}
