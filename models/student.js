@@ -5,11 +5,7 @@ const studentSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  studentId: {
-    type: String,
-    required: true,
-    unique: true
-  },
+  
   email: {
     type: String,
     required: true,
@@ -20,4 +16,7 @@ const studentSchema = new mongoose.Schema({
     required: true
   }
 }, { timestamps: true });
+
 const  student  = mongoose.model('Student', studentSchema);
+
+export default student;

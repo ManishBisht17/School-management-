@@ -2,7 +2,8 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import teacherRoutes from './routes/teacher.js'
+import teacherRoute from './routes/teacher.js'
+import studentRoute from './routes/teacher.js'
 
 // Load environment variables
 dotenv.config();
@@ -19,7 +20,9 @@ const MONGO_URI = process.env.MONGO_URI;
 
 
 //Routes handling
-app.use('/teacher',teacherRoutes)
+
+app.use('/student', studentRoute)
+app.use('/teacher',teacherRoute)
 
 
 // Database connection
@@ -31,9 +34,6 @@ const db=mongoose
   .catch((err) => {
     console.error('MongoDB connection error:', err);
   });
-
-
-
 
 
 // Start server
