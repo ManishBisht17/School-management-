@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-studentSchema
+
 const studentSchema = new mongoose.Schema({
   name: {
     type: String,

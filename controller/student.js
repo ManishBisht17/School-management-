@@ -1,6 +1,6 @@
 import student from '../models/student.js'
 
-export const createStudent = async (req, res)=>{
+const createStudent = async (req, res)=>{
     try{
     const { name, email, password } = req.body;
     const newStudent = await student({name, email, password}).save();
@@ -18,3 +18,4 @@ export const createStudent = async (req, res)=>{
     }
 }
 
+export default createStudent;
