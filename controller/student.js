@@ -13,12 +13,9 @@ export const createStudent = async (req, res) => {
     const newStudent = new Student({ name, email, password: hashedPassword });
     await newStudent.save();
 
-    // Remove the password from response for security
-    const { password: _, ...studentData } = newStudent.toObject();
-
     res.status(201).json({
       message: "Student Account Created Successfully",
-      data: studentData,
+      data: newStudent,
     });
   } catch (error) {
     console.error("Error in student creation:", error);
@@ -32,25 +29,37 @@ export const studentLogin = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const loginStudent = await student.findOne({ email });
-    if (loginStudent.password !== password) {
+    // Find the student by email
+    const loginStudent = await Student.findOne({ email });
+
+    // Check if the student exists
+    if (!loginStudent) {
+      return res.status(401).json({
+        message: "Invalid email or password", // Avoid revealing that the user doesn't exist
+      });
+    }
+
+    // Compare the provided password with the hashed password in the database
+    const matchPassword = await bcrypt.compare(password, loginStudent.password);
+    if (!matchPassword) {
       return res.status(401).json({
         message: "Invalid email or password",
       });
     }
-    if (!loginStudent) {
-      return res.status(401).json({
-        message: "User does not found",
-      });
-    }
+
+    // If everything is correct, return a success response
     res.status(200).json({
-      message: "Student login successful ",
-      data: loginStudent,
+      message: "Student login successful",
+      data: {
+        id: loginStudent._id,
+        email: loginStudent.email,
+        name: loginStudent.name,
+      },
     });
   } catch (error) {
-    console.log(error);
+    console.error("Error in student login:", error);
     res.status(500).json({
-      message: "There is error in student login",
+      message: "An error occurred during login",
     });
   }
 };

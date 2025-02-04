@@ -18,9 +18,6 @@ export const createTeacher = async (req, res) => {
     });
     await newTecher.save();
 
-    // Remove the password from response for security
-    const { password: _, ...teacherData } = newTecher.toObject();
-
     res.status(201).json({
       message: "Student Account Created Successfully",
       data: teacherData,
@@ -36,14 +33,16 @@ export const createTeacher = async (req, res) => {
 export const teacherLogin = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const loginTecher = await teacher.findOne({ email });
+    const loginTecher = await Teacher.findOne({ email });
 
     if (!loginTecher) {
       return res.status(401).json({
         message: "Teacher does not found with this id ",
       });
     }
-    if (loginTecher.password !== password) {
+
+    const isMatched = await bcrypt.compare(password, loginTecher.password);
+    if (!isMatched) {
       return res.status(401).json({
         message: "Invalid email or password",
       });
