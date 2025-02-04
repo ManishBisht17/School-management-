@@ -1,9 +1,12 @@
 import student from "../models/student.js";
+import bcrypt from "bcrypt";
 
 export const createStudent = async (req, res) => {
   try {
     const { name, email, password } = req.body;
-    const newStudent = await student({ name, email, password }).save();
+    const newStudent = await new student({ name, email, password }).save();
+    const salt = await bcrypt.genSalt(10);
+    const hashed = await bcrypt.hash(password, salt);
 
     res.status(201).json({
       message: "Student Acoount Created Successfully",
