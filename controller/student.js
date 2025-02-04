@@ -1,21 +1,29 @@
-import student from "../models/student.js";
+import Student from "../models/student.js";
 import bcrypt from "bcrypt";
 
 export const createStudent = async (req, res) => {
   try {
     const { name, email, password } = req.body;
-    const newStudent = await new student({ name, email, password }).save();
+
+    // Generate a salt and hash the password before saving
     const salt = await bcrypt.genSalt(10);
-    const hashed = await bcrypt.hash(password, salt);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    // Create a new student with the hashed password
+    const newStudent = new Student({ name, email, password: hashedPassword });
+    await newStudent.save();
+
+    // Remove the password from response for security
+    const { password: _, ...studentData } = newStudent.toObject();
 
     res.status(201).json({
-      message: "Student Acoount Created Successfully",
-      data: newStudent,
+      message: "Student Account Created Successfully",
+      data: studentData,
     });
   } catch (error) {
-    console.log(error);
+    console.error("Error in student creation:", error);
     res.status(500).json({
-      message: "There is error in student creation",
+      message: "There was an error creating the student account",
     });
   }
 };
