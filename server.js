@@ -2,8 +2,10 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
+import path from "path";
 import teacherRoute from "./routes/teacher.js";
 import studentRoute from "./routes/student.js";
+import homeRoute from "./routes/homeRoute.js";
 
 // Load environment variables
 dotenv.config();
